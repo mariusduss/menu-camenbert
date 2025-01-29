@@ -1,174 +1,175 @@
+/* Importation de la police Poppins de Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-/* Réinitialisation des marges, espacements et modification du modèle de boîte */
+
+/* Réinitialisation des marges, paddings et box-sizing pour tous les éléments */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Permet de s'assurer que padding et bordure n'affectent pas la taille des éléments */
-  }
-  
-  /* Application de la police globale à tout le corps de la page */
-  body {
-    font-family: "Poppins", sans-serif;
-  }
-  
-  /* Définition du conteneur principal pour centrer le contenu et définir une largeur maximale */
-  .container {
-    max-width: 1050px; /* Limite la largeur du conteneur à 1050px */
-    width: 90%; /* La largeur du conteneur est de 90% de l'écran */
-    margin: auto; /* Centre le conteneur horizontalement */
-  }
-  
-  /* Style de la barre de navigation avec une ombre portée */
-  .navbar {
+    margin: 0;  /* Enlève la marge par défaut */
+    padding: 0; /* Enlève le padding par défaut */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur et la hauteur des éléments */
+}
+
+/* Application de la police "Poppins" à tout le corps de la page */
+body {
+    font-family: "Poppins", sans-serif; /* Police définie comme Poppins */
+}
+
+/* Conteneur principal de la page, limité à 1050px de large */
+.container {
+    max-width: 1050px; /* Largeur maximale du conteneur */
+    width: 90%; /* Largeur relative à 90% de l'écran */
+    margin: auto; /* Centrage horizontal du conteneur */
+}
+
+/* Style de la barre de navigation */
+.navbar {
     width: 100%; /* La barre de navigation prend toute la largeur */
-    box-shadow: 0 1px 4px rgb(182, 182, 182); /* Ombre légère sous la barre de navigation */
-  }
-  
-  /* Conteneur de la navigation utilisant Flexbox pour espacer les éléments */
-  .nav-container {
-    display: flex; /* Utilisation de flexbox pour disposer les éléments */
-    justify-content: space-between; /* Espacement égal entre les éléments */
-    align-items: center; /* Centrer les éléments verticalement */
-    height: 62px; /* Hauteur de la barre de navigation */
-  }
-  
-  /* Style de la liste des éléments du menu, positionnés horizontalement */
-  .navbar .menu-items {
-    display: flex; /* Disposition en ligne pour les éléments du menu */
-  }
-  
-  /* Suppression des puces de la liste */
-  .navbar .nav-container li {
-    list-style: none;
-  }
-  
-  /* Style des liens de menu (texte, couleur, taille, espacement) */
-  .navbar .nav-container a {
-    text-decoration: none; /* Retire le souligné par défaut des liens */
+    box-shadow: 0 1px 4px rgb(182, 182, 182); /* Ajout d'une ombre légère sous la navbar */
+}
+
+/* Conteneur de la navbar avec un alignement des éléments en ligne et un espacement */
+.nav-container {
+    display: flex; /* Affiche les éléments enfants (menu et logo) en ligne */
+    justify-content: flex-start; /* Aligne le contenu à gauche */
+    align-items: center; /* Centre les éléments verticalement */
+    height: 62px; /* Hauteur fixe pour la navbar */
+    position: relative; /* Position relative pour positionner les éléments enfants de manière absolue si nécessaire */
+}
+
+/* Le logo (ou titre) est positionné à droite de l'écran sur tous les écrans */
+.nav-container .logo {
+    position: absolute; /* Permet de positionner le logo par rapport à la navbar */
+    right: 20px; /* Positionne le logo à 20px du bord droit */
+}
+
+/* Style des éléments du menu, affichés horizontalement par défaut */
+.navbar .menu-items {
+    display: flex; /* Affiche les éléments du menu en ligne */
+    flex-direction: row; /* Menu aligné horizontalement */
+}
+
+/* Suppression des puces des éléments de liste */
+.navbar .nav-container li {
+    list-style: none; /* Enlève les puces des listes */
+}
+
+/* Style des liens dans le menu */
+.navbar .nav-container a {
+    text-decoration: none; /* Supprime le soulignement des liens */
     color: #0059ff; /* Couleur bleue des liens */
-    font-weight: 500; /* Poids de la police pour les liens */
-    font-size: 1.2rem; /* Taille de police pour les liens */
-    padding: 0.7rem; /* Ajout de padding autour des liens */
-  }
-  
-  /* Effet au survol des liens (changer le poids de la police) */
-  .navbar .nav-container a:hover {
-      font-weight: bolder; /* Rendre le texte plus gras au survol */
-  }
-  
-  /* Redéfinition du conteneur de la barre de navigation pour qu'il se transforme en bloc lors de l'activation du hamburger */
-  .nav-container {
-    display: block; /* Transforme le conteneur en bloc pour permettre la gestion du menu hamburger */
-    position: relative; /* Nécessaire pour positionner les éléments internes comme le hamburger */
-    height: 60px;
-  }
-  
-  /* Style du checkbox utilisé pour le menu hamburger */
-  .nav-container .checkbox {
-    position: absolute; /* Position absolue pour superposer le checkbox sur le bouton hamburger */
-    display: block; /* Rendre le checkbox visible (pour interaction) */
-    height: 32px; /* Hauteur du checkbox */
-    width: 32px; /* Largeur du checkbox */
-    top: 20px; /* Position du checkbox à 20px du haut */
-    left: 20px; /* Position du checkbox à 20px du côté gauche */
-    z-index: 5; /* Place le checkbox au-dessus des autres éléments */
-    opacity: 0; /* Cache le checkbox, mais il est toujours interactif */
-    cursor: pointer; /* Changement du curseur pour indiquer l'interaction */
-  }
-  
-  /* Structure et style des lignes du menu hamburger */
-  .nav-container .hamburger-lines {
-    display: block; /* Affichage de la structure hamburger */
-    height: 26px; /* Hauteur totale des lignes du hamburger */
-    width: 32px; /* Largeur totale des lignes du hamburger */
-    position: absolute; /* Position absolue pour superposer les lignes sur le checkbox */
-    top: 17px; /* Position des lignes à 17px du haut */
-    left: 20px; /* Position des lignes à 20px du côté gauche */
-    z-index: 2; /* Place les lignes du hamburger au-dessus du fond */
-    display: flex; /* Utilisation de flexbox pour aligner les lignes verticalement */
-    flex-direction: column; /* Disposition des lignes en colonne */
-    justify-content: space-between; /* Espacement entre les lignes */
-  }
-  
-  /* Style pour chaque ligne du hamburger */
-  .nav-container .hamburger-lines .line {
-    display: block; /* Affiche chaque ligne */
+    font-weight: 500; /* Poids de la police à 500 */
+    font-size: 1.2rem; /* Taille de la police des liens */
+    padding: 0.7rem; /* Espacement autour du texte */
+}
+
+/* Effet au survol des liens */
+.navbar .nav-container a:hover {
+    font-weight: bolder; /* Rendre le texte plus gras au survol */
+}
+
+/* Section cachée pour le hamburger sur les petits écrans */
+.nav-container .checkbox {
+    position: absolute; /* Permet de positionner le hamburger sans affecter les autres éléments */
+    display: block; /* Affiche l'élément comme un bloc */
+    height: 32px; /* Taille du hamburger */
+    width: 32px; /* Taille du hamburger */
+    top: 20px; /* Position verticale du hamburger */
+    left: 20px; /* Position horizontale à gauche de l'écran */
+    z-index: 5; /* Positionne l'élément au-dessus des autres */
+    opacity: 0; /* Rendre l'élément invisible tout en restant interactif */
+    cursor: pointer; /* Affiche le curseur en main pour signifier que c'est cliquable */
+}
+
+/* Style du hamburger (3 lignes) */
+.nav-container .hamburger-lines {
+    display: flex; /* Affiche les 3 lignes du hamburger en ligne */
+    flex-direction: column; /* Aligne les lignes du hamburger de haut en bas */
+    justify-content: space-between; /* Espace uniforme entre les lignes */
+    width: 30px; /* Largeur du hamburger */
+    height: 25px; /* Hauteur du hamburger */
+    cursor: pointer; /* Affiche le curseur en main */
+    position: absolute; /* Positionné absolument par rapport à la navbar */
+    left: 20px; /* Positionne le hamburger à gauche sur petits écrans */
+    top: 20px; /* Position verticale du hamburger */
+}
+
+/* Style des 3 lignes du hamburger */
+.nav-container .hamburger-lines .line {
+    width: 100%; /* Chaque ligne prend la largeur complète du conteneur */
     height: 4px; /* Hauteur de chaque ligne */
-    width: 100%; /* Largeur complète de chaque ligne */
-    border-radius: 10px; /* Coins arrondis pour les lignes */
     background: #0059ff; /* Couleur bleue des lignes */
-  }
-  
-  /* Effet de transformation pour la ligne 1 du hamburger */
-  .nav-container .hamburger-lines .line1 {
-    transform-origin: 0% 0%; /* Point d'origine de la transformation */
-    transition: transform 0.4s ease-in-out; /* Animation lors du changement de position */
-  }
-  
-  /* Effet de transformation pour la ligne 2 du hamburger */
-  .nav-container .hamburger-lines .line2 {
-    transition: transform 0.2s ease-in-out; /* Animation plus rapide pour la ligne 2 */
-  }
-  
-  /* Effet de transformation pour la ligne 3 du hamburger */
-  .nav-container .hamburger-lines .line3 {
-    transform-origin: 0% 100%; /* Point d'origine pour la ligne 3 */
-    transition: transform 0.4s ease-in-out; /* Animation lors du changement de position */
-  }
-  
-  /* Style du menu lorsque celui-ci est en mode mobile (avant que le checkbox ne soit coché) */
-  .navbar .menu-items {
-    padding-top: 120px; /* Espacement supplémentaire pour ne pas chevaucher d'autres éléments */
-    box-shadow: inset 0 0 2000px rgb(255, 255, 255); /* Ombre interne pour le fond */
-    height: 100vh; /* Hauteur totale de l'écran */
-    width: 100%; /* Largeur totale du menu */
-    transform: translate(-150%); /* Déplacer le menu hors de la vue initialement */
-    display: flex; /* Disposition verticale des éléments du menu */
-    flex-direction: column; /* Disposition des éléments du menu en colonne */
-    margin-left: -40px; /* Décalage du menu pour l'aligner correctement */
-    padding-left: 50px; /* Ajout de padding à gauche */
-    transition: transform 0.5s ease-in-out; /* Animation lors du changement de position */
-    text-align: center; /* Centrer les éléments du menu */
-  }
-  
-  /* Espacement et style des éléments de menu */
-  .navbar .menu-items li {
-    margin-bottom: 1.2rem; /* Espacement entre les éléments du menu */
-    font-size: 1.5rem; /* Taille de police des éléments du menu */
-    font-weight: 500; /* Poids de la police pour les éléments du menu */
-  }
-  
-  /* Style du logo de la barre de navigation */
-  .logo {
-    position: absolute; /* Position absolue pour placer le logo indépendamment */
-    top: 5px; /* Position du logo à 5px du haut */
-    right: 15px; /* Position du logo à 15px du côté droit */
-    font-size: 1.2rem; /* Taille de la police pour le logo */
-    color: #0059ff; /* Couleur bleue du logo */
-  }
-  
-  /* Lorsque le checkbox est coché, le menu devient visible (translation horizontale vers 0) */
-  .nav-container input[type="checkbox"]:checked ~ .menu-items {
-    transform: translateX(0); /* Restaure le menu dans sa position d'origine */
-  }
-  
-  /* Transformation des lignes du hamburger en "X" lorsqu'il est coché */
-  .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
-    transform: rotate(45deg); /* Rotation de la première ligne */
-  }
-  
-  /* Transformation de la ligne du milieu pour qu'elle disparaisse */
-  .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
-    transform: scaleY(0); /* Réduit la ligne du milieu à 0 sur l'axe vertical */
-  }
-  
-  /* Transformation de la troisième ligne pour qu'elle se place en bas à gauche */
-  .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
-    transform: rotate(-45deg); /* Rotation de la troisième ligne */
-  }
-  
-  /* Cacher le logo lorsque le menu est ouvert */
-  .nav-container input[type="checkbox"]:checked ~ .logo {
-    display: none; /* Le logo disparaît quand le menu est ouvert */
-  }
-  
+    border-radius: 10px; /* Bordures arrondies pour un aspect plus doux */
+}
+
+/* Menu affiché horizontalement sur les écrans larges */
+.navbar .menu-items {
+    display: flex; /* Affiche les éléments du menu en ligne */
+    flex-direction: row; /* Menu horizontal par défaut */
+    position: relative; /* Permet un positionnement relatif pour les éléments du menu */
+}
+
+/* Médias queries pour les petits écrans (moins de 768px) */
+@media (max-width: 768px) {
+    /* Masquer le menu sur les petits écrans, sauf si le hamburger est activé */
+    .navbar .menu-items {
+        display: none; /* Cacher le menu par défaut */
+        flex-direction: column; /* Affiche le menu verticalement */
+        position: absolute; /* Positionnement absolu du menu */
+        top: 60px; /* Positionner le menu sous la navbar */
+        left: 0; /* Positionne le menu à gauche de l'écran */
+        width: 100%; /* Le menu prend toute la largeur de l'écran */
+        background-color: #fff; /* Fond blanc pour le menu */
+        text-align: center; /* Aligne le texte du menu au centre */
+    }
+
+    /* Affichage du hamburger uniquement sur petits écrans */
+    .nav-container .hamburger-lines {
+        display: flex; /* Affiche le hamburger sur petits écrans */
+    }
+
+    /* Quand le checkbox est coché (hamburger activé), afficher le menu */
+    .nav-container input[type="checkbox"]:checked ~ .menu-items {
+        display: flex; /* Affiche le menu en mode vertical */
+    }
+
+    /* Animation pour transformer le hamburger en croix */
+    .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+        transform: rotate(45deg); /* Première ligne transformée en croix */
+        transform-origin: 0% 0%; /* Origine de la transformation (haut-gauche) */
+    }
+
+    .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+        transform: scaleY(0); /* La ligne du milieu disparaît */
+    }
+
+    .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+        transform: rotate(-45deg); /* Troisième ligne transformée en croix */
+        transform-origin: 0% 100%; /* Origine de la transformation (bas-gauche) */
+    }
+
+    /* Cacher le logo lorsque le menu est ouvert sur petits écrans */
+    .nav-container input[type="checkbox"]:checked ~ .logo {
+        display: none; /* Le logo disparaît lorsque le menu est ouvert */
+    }
+}
+
+/* Sur grand écran, afficher le menu horizontal et cacher le hamburger */
+@media (min-width: 769px) {
+    /* Menu horizontal sur grands écrans */
+    .navbar .menu-items {
+        display: flex;
+        flex-direction: row; /* Menu horizontal */
+        justify-content: flex-start; /* Aligne le menu à gauche */
+    }
+
+    /* Cacher le hamburger sur grands écrans */
+    .nav-container .hamburger-lines {
+        display: none; /* Masquer les 3 barres sur grands écrans */
+    }
+
+    /* Le logo reste affiché à droite sur grands écrans */
+    .nav-container .logo {
+        display: block;
+        position: absolute; /* Positionne le logo de manière absolue */
+        right: 20px; /* Positionne le logo à droite de l'écran */
+    }
+}
